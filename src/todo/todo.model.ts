@@ -1,3 +1,4 @@
+// todo.model.ts
 import {
   Column,
   CreatedAt,
@@ -6,7 +7,10 @@ import {
   PrimaryKey,
   Table,
   UpdatedAt,
+  ForeignKey,
+  BelongsTo,
 } from 'sequelize-typescript';
+import { User } from '../user/user.model';
 
 @Table({ tableName: 'todos' })
 export class Todo extends Model<Todo> {
@@ -17,16 +21,18 @@ export class Todo extends Model<Todo> {
   })
   declare id: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
+  @Column({ type: DataType.STRING, allowNull: false })
   title: string;
 
-  @Column({
-    type: DataType.TEXT,
-  })
+  @Column({ type: DataType.TEXT })
   description: string;
+
+  @ForeignKey(() => User)
+  @Column({ type: DataType.UUID, field: 'user_id' })
+  user_id: string;
+
+  @BelongsTo(() => User)
+  user: User;
 
   @CreatedAt
   @Column({ field: 'created_at' })

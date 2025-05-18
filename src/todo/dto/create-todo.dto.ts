@@ -7,4 +7,7 @@ export class CreateTodoDto {
 
   @IsString()
   description: string;
+
+  @IsString()
+  user_id?: string;
 }
