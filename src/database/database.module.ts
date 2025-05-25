@@ -25,7 +25,7 @@ import { Sequelize } from 'sequelize-typescript';
           password: dbUrl.password,
           database: dbUrl.pathname.replace('/', ''),
           autoLoadModels: true,
-          synchronize: true,
+          synchronize: true, // Set to false in production
           logging: (msg) => console.log(msg),
           dialectOptions: {
             ssl: {
